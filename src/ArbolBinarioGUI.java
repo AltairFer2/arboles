@@ -52,7 +52,7 @@ public class ArbolBinarioGUI extends JFrame {
     public ArbolBinarioGUI(ArbolBinario arbol) {
         this.arbol = arbol;
         setTitle("Árbol Binario");
-        setSize(800, 600);
+        setSize(800, 400); // Cambia las dimensiones del JFrame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
         setLocationRelativeTo(null);
@@ -88,18 +88,20 @@ public class ArbolBinarioGUI extends JFrame {
     }
 
     class DibujoArbol extends JPanel {
-        private int radioNodo = 20;
-        private int espacioHorizontal = 40;
+        private int radioNodo = 40; // Cambia el tamaño de los nodos
+        private int espacioHorizontal = 80; // Cambia el espacio horizontal entre nodos
+        private Font font = new Font("Arial", Font.BOLD, 18); // Cambia la fuente y tamaño de fuente
 
         public DibujoArbol(ArbolBinario arbol) {
-            setPreferredSize(new Dimension(800, 600));
+            setPreferredSize(new Dimension(1200, 800)); // Cambia las dimensiones del JPanel
         }
 
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
+            g.setFont(font); // Establece la fuente
             if (arbol.raiz != null) {
-                dibujarNodo(g, getWidth() / 2, 30, arbol.raiz);
+                dibujarNodo(g, getWidth() / 2, 50, arbol.raiz);
             }
         }
 
@@ -112,18 +114,18 @@ public class ArbolBinarioGUI extends JFrame {
             g.fillOval(x - radioNodo, y - radioNodo, 2 * radioNodo, 2 * radioNodo);
             g.setColor(Color.BLACK);
             g.drawOval(x - radioNodo, y - radioNodo, 2 * radioNodo, 2 * radioNodo);
-            g.drawString(String.valueOf(nodo.valor), x - 6, y + 4);
+            g.drawString(String.valueOf(nodo.valor), x - 10, y + 6); // Ajusta la posición del texto
 
             if (nodo.izquierdo != null) {
                 int xIzq = x - espacioHorizontal / 2;
-                int yIzq = y + 60;
+                int yIzq = y + 100; // Ajusta la posición vertical de los nodos hijos
                 g.drawLine(x, y + radioNodo, xIzq, yIzq - radioNodo);
                 dibujarNodo(g, xIzq, yIzq, nodo.izquierdo);
             }
 
             if (nodo.derecho != null) {
                 int xDer = x + espacioHorizontal / 2;
-                int yDer = y + 60;
+                int yDer = y + 100; // Ajusta la posición vertical de los nodos hijos
                 g.drawLine(x, y + radioNodo, xDer, yDer - radioNodo);
                 dibujarNodo(g, xDer, yDer, nodo.derecho);
             }
